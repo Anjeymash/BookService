@@ -11,10 +11,8 @@ public class Book {
 	        this. name = name;
 	        this.author = author;
 	        this.age = age;
-
 	}
 		
-
 @Override
 public int hashCode() {
 	final int prime = 31;

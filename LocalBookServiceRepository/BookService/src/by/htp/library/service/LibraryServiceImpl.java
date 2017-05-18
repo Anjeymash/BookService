@@ -68,10 +68,10 @@ public class LibraryServiceImpl implements LibraryService {
 		try {
 			DAOFactory daoObjectFactory = DAOFactory.getInstance();
 			BookDAO bookDAO = daoObjectFactory.getBookDAO();
-			bookDAO.deleteBook(book);
+			//bookDAO.deleteBook(book);
 			bookDAO.addBook(book);
 		} catch (DAOException e) {
-			new ServiceException(e);
+			throw new ServiceException(e);
 		}
 	}
 

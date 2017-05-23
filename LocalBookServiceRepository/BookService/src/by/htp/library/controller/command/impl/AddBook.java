@@ -19,7 +19,7 @@ public String execute(String request){
 		response = "Book "+ book.getName() + " " + book.getAuthor() + " " + book.getAge()+ " is added";
 	}
 	catch(ServiceException e){
-		System.out.println(e);
+		e.printStackTrace();
 		response = "Error adding append procedure";
 	}
 	

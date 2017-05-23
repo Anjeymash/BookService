@@ -20,7 +20,7 @@ public class DelBook implements Command {
 			libraryService.delBook(book);
 			response = "Book " + book.getName() + " " + book.getAuthor() + " " + book.getAge() + " deleted";
 		} catch (ServiceException e) {
-			System.out.println(e);
+			e.printStackTrace();
 			response = "Error duiring delete procedure";
 		}
 

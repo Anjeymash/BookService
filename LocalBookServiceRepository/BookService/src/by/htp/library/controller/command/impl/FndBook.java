@@ -21,7 +21,7 @@ public class FndBook implements Command {
 			book = libraryService.fndBook(s[1]);
 			response = "The book " + book.getName() + " " + book.getAuthor() + " " + book.getAge() + " is found";
 		} catch (ServiceException e) {
-			System.out.println(e);
+			e.printStackTrace();
 			response = "The book is not found";
 		}
 

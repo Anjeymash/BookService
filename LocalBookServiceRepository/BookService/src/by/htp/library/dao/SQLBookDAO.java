@@ -30,17 +30,19 @@ public class SQLBookDAO implements BookDAO {
 	}
 
 	@Override
-	public Book findBook(String name) throws DAOException {
+	public ArrayList<Book> findBook(String name) throws DAOException {
 		// TODO Auto-generated method stub
-		Book book = null;
+		//Book book = null;
 
 		initArrayListBook();
-		book = fBook(name);
-		return book;
+		fBook(name);
+		return foundbooks;
+		
 
 	}
 
 	public static ArrayList<Book> books = new ArrayList<Book>();
+	public static ArrayList<Book> foundbooks = new ArrayList<Book>();
 
 	public static void initArrayListBook() throws DAOException {
 
@@ -61,18 +63,17 @@ public class SQLBookDAO implements BookDAO {
 
 	}
 
-	public static Book fBook(String s) throws DAOException {
-		Book book = null;
+	public static void fBook(String s) throws DAOException {
+		//Book book = null;
 		for (Book x : books) {
 			if (x.getName().equals(s)) {
-			book = x;
+			foundbooks.add(x);
 			}
 		}
-		if (book == null) {
+		if (foundbooks.isEmpty()) {
 			throw new DAOException("such a book does not exist");
 		}
-		return book;
-	}
+			}
 
 	public static void dBook(Book book) throws DAOException {
 		int count = 0;

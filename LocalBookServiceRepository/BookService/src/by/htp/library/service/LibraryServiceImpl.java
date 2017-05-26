@@ -1,5 +1,7 @@
 package by.htp.library.service;
 
+import java.util.ArrayList;
+
 import by.htp.library.bean.Book;
 import by.htp.library.dao.BookDAO;
 import by.htp.library.dao.DAOException;
@@ -40,21 +42,21 @@ public class LibraryServiceImpl implements LibraryService {
 	}
 
 	@Override
-	public Book fndBook(String name) throws ServiceException {
+	public ArrayList<Book> fndBook(String name) throws ServiceException {
 		// TODO Auto-generated method stub
-		Book book = null;
+		ArrayList<Book> foundbooks = null;
 		if (name == null) {
 			throw new ServiceException("Incorrect input data");
 		}
 		try {
 			DAOFactory daoObjectFactory = DAOFactory.getInstance();
 			BookDAO bookDAO = daoObjectFactory.getBookDAO();
-			book = bookDAO.findBook(name);
+			foundbooks = bookDAO.findBook(name);
 
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}
-		return book;
+		return foundbooks;
 
 	}
 

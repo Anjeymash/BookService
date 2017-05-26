@@ -6,6 +6,7 @@ import java.util.Map;
 import by.htp.library.bean.Book;
 import by.htp.library.controller.command.CommandName;
 import by.htp.library.controller.command.impl.AddBook;
+import by.htp.library.controller.command.impl.ChangeBook;
 import by.htp.library.controller.command.impl.DelBook;
 import by.htp.library.controller.command.impl.FndBook;
 import by.htp.library.controller.command.impl.WrongRequest;
@@ -17,6 +18,7 @@ public class CommandProvider {
 		repository.put(CommandName.ADD_BOOK, new AddBook());
 		repository.put(CommandName.FND_BOOK, new FndBook());
 		repository.put(CommandName.DEL_BOOK, new DelBook());
+		repository.put(CommandName.CHANGE_BOOK, new ChangeBook());
 		repository.put(CommandName.WRONG_REQUEST, new WrongRequest());
 
 	}

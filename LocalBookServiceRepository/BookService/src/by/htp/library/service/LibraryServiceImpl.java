@@ -37,7 +37,7 @@ public class LibraryServiceImpl implements LibraryService {
 			BookDAO bookDAO = daoObjectFactory.getBookDAO();
 			bookDAO.deleteBook(book);
 		} catch (DAOException e) {
-			throw new ServiceException(e);// System.out.println(d);
+			throw new ServiceException(e);
 		}
 	}
 
@@ -60,18 +60,16 @@ public class LibraryServiceImpl implements LibraryService {
 
 	}
 
-	// œ≈–≈œ»—¿“‹!!!!!
 	@Override
-	public void addEditedBook(Book book) throws ServiceException {
+	public void addEditedBook(Book oldBook, Book newBook) throws ServiceException {
 		// TODO Auto-generated method stub
-		if (book == null) {
+		if (oldBook == null) {
 			throw new ServiceException("Incorrect input data");
 		}
 		try {
 			DAOFactory daoObjectFactory = DAOFactory.getInstance();
 			BookDAO bookDAO = daoObjectFactory.getBookDAO();
-			//bookDAO.deleteBook(book);
-			bookDAO.addBook(book);
+			bookDAO.addEditedBook(oldBook, newBook);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}

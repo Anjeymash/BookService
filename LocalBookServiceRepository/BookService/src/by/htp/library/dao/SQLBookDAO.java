@@ -24,7 +24,6 @@ public class SQLBookDAO implements BookDAO {
 		// TODO Auto-generated method stub
 		initArrayListBook();
 		dBook(book);
-
 		writeToFile(books);
 
 	}
@@ -32,12 +31,18 @@ public class SQLBookDAO implements BookDAO {
 	@Override
 	public ArrayList<Book> findBook(String name) throws DAOException {
 		// TODO Auto-generated method stub
-		//Book book = null;
-
 		initArrayListBook();
 		fBook(name);
 		return foundbooks;
-		
+
+	}
+
+	@Override
+	public void addEditedBook(Book oldBook, Book newBook) throws DAOException {
+		// TODO Auto-generated method stub
+		initArrayListBook();
+		chBook(oldBook, newBook);
+		writeToFile(books);
 
 	}
 
@@ -52,7 +57,7 @@ public class SQLBookDAO implements BookDAO {
 
 			Book mybook;
 			while (in.hasNext()) {
-				str = in.nextLine().split(" ", 3);
+				str = in.nextLine().split(" ", 4);
 				mybook = new Book(str[0], str[1], str[2]);
 				books.add(mybook);
 			}
@@ -64,16 +69,31 @@ public class SQLBookDAO implements BookDAO {
 	}
 
 	public static void fBook(String s) throws DAOException {
-		//Book book = null;
 		for (Book x : books) {
 			if (x.getName().equals(s)) {
-			foundbooks.add(x);
+				foundbooks.add(x);
 			}
 		}
 		if (foundbooks.isEmpty()) {
 			throw new DAOException("such a book does not exist");
 		}
+	}
+
+	public static void chBook(Book oldbook, Book newBook) throws DAOException {
+		int count = 0;
+		for (Book x : books) {
+			if (x.equals(oldbook)) {
+				x.setName(newBook.getName());
+				x.setAuthor(newBook.getAuthor());
+				x.setAge(newBook.getAge());
+				count++;
 			}
+			
+		}
+		if (count == 0)
+			throw new DAOException("such a book does not exist");
+
+	}
 
 	public static void dBook(Book book) throws DAOException {
 		int count = 0;
@@ -95,14 +115,15 @@ public class SQLBookDAO implements BookDAO {
 			BufferedWriter bw = new BufferedWriter(new FileWriter("books.txt", true));
 			bw.write(book.getName() + " ");
 			bw.write(book.getAuthor() + " ");
-			bw.write(book.getAge() + " ");
-			bw.write('\n');
+			bw.write(book.getAge() + '\n');
 
 			bw.close();
+
 			/*
 			 * } catch (FileNotFoundException e) { throw new
-			 * DAOException("файл не найден", e);
+			 * DAOException("file not found", e);
 			 */
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			throw new DAOException("writing to file error", e);
@@ -118,11 +139,11 @@ public class SQLBookDAO implements BookDAO {
 
 				bw.write(x.getName() + " ");
 				bw.write(x.getAuthor() + " ");
-				bw.write(x.getAge() + " ");
-				bw.write('\n');
+				bw.write(x.getAge() + "\n");
 
 			}
 			bw.close();
+			// finally {bw.close();}
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -8,7 +8,7 @@ public interface LibraryService {
 void addNewBook(Book book) throws ServiceException;
 void delBook(Book book) throws ServiceException;
 ArrayList<Book> fndBook(String name) throws ServiceException;
-void addEditedBook(Book book)throws ServiceException;
+void addEditedBook(Book oldBook, Book newBook) throws ServiceException;
 
 
 

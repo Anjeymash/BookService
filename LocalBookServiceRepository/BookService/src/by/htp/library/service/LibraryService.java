@@ -10,6 +10,4 @@ void delBook(Book book) throws ServiceException;
 ArrayList<Book> fndBook(String name) throws ServiceException;
 void addEditedBook(Book oldBook, Book newBook) throws ServiceException;
 
-
-
 }

@@ -13,6 +13,8 @@ public class DelBook implements Command {
 		String response = null;
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 		LibraryService libraryService = serviceFactory.getLibraryService();
+		
+		try {
 		String s[] = request.split(" ", 4);
 		Book book = new Book(s[1], s[2], s[3]);
 
@@ -23,7 +25,11 @@ public class DelBook implements Command {
 			e.printStackTrace();
 			response = "Error duiring delete procedure";
 		}
-
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			response = "parsing failed";}
+		
 		return response;
 	}
 }

@@ -12,17 +12,25 @@ public String execute(String request){
 	String response = null;
 	ServiceFactory serviceFactory = ServiceFactory.getInstance();
 	LibraryService libraryService = serviceFactory.getLibraryService();
-	String s[] =request.split(" ", 4);
-	Book book = new Book(s[1], s[2], s[3]);
-	try{
-		libraryService.addNewBook(book);
-		response = "Book "+ book.getName() + " " + book.getAuthor() + " " + book.getAge()+ " is added";
-	}
-	catch(ServiceException e){
-		e.printStackTrace();
-		response = "Error adding append procedure";
-	}
 	
+		
+	try{
+		String s[] =request.split(" ", 4);
+		Book book = new Book(s[1], s[2], s[3]);	
+		
+		try{
+		libraryService.addNewBook(book);
+		response = "Book "+ book.getName() + " " + book.getAuthor() + " " + book.getAge()+ " is added";}
+		catch(ServiceException e){
+			e.printStackTrace();
+			response = "Error adding append procedure";
+		}
+	}
+	catch(Exception e){
+		e.printStackTrace();
+		response = "parsing failed";
+	}
+		
 	return response;
 }
 }
